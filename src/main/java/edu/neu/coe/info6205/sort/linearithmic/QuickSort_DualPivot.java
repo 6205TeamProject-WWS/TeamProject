@@ -1,10 +1,17 @@
 package edu.neu.coe.info6205.sort.linearithmic;
 
 import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.SortWithHelper;
+import edu.neu.coe.info6205.sort.counting.MSDStringSort;
 import edu.neu.coe.info6205.util.Config;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
+
+import static edu.neu.coe.info6205.util.PinyinUtil.getPinyin;
+import static edu.neu.coe.info6205.util.PinyinUtil.readAllChinese;
 
 public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
@@ -34,6 +41,7 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
     public QuickSort_DualPivot(int N, Config config) {
         this(DESCRIPTION, N, config);
     }
+
 
     @Override
     public Partitioner<X> createPartitioner() {
@@ -97,5 +105,25 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
         private final Helper<X> helper;
     }
+
+    public static void main(String[] args) {
+        String[] s = readAllChinese();
+        String[] rs = new String[s.length];
+        for (int i = 0; i < s.length; i++) {
+            rs[i] = getPinyin(s[i], " ");
+        }
+
+        Map<String, String> map = new IdentityHashMap<String, String>();
+        for (int i = 0; i < s.length; i++) {
+            map.put(rs[i], s[i]);
+        }
+
+//        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(rs.length, );
+//        quickSort_dualPivot.sort(rs,0,rs.length);
+
+        for (String x : rs)
+            System.out.println(map.get(x));
+    }
+
 }
 

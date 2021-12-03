@@ -20,7 +20,11 @@ public class PinyinUtil {
         // 设置声调表示方法
         format.setToneType(HanyuPinyinToneType.WITH_TONE_NUMBER);
         // 设置字母u表示方法
+<<<<<<< HEAD
         format.setVCharType(HanyuPinyinVCharType.WITH_V);
+=======
+        format.setVCharType(HanyuPinyinVCharType.WITH_U_AND_COLON);
+>>>>>>> 14d2073 (1st MSD&LSD)
         String[] s;
         String rs = null;
         try {
@@ -67,10 +71,13 @@ public class PinyinUtil {
 
     }
 
+<<<<<<< HEAD
 //    public static void main(String[] args) {
 //        String[] s = readAllChinese();
 //        for (int i = 0; i < s.length; i++)
 //        System.out.println(getPinyin(s[i]," "));
 //    }
+=======
+>>>>>>> 14d2073 (1st MSD&LSD)
 
 }
