@@ -1,5 +1,11 @@
 package edu.neu.coe.info6205.sort.counting;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
+
+import static edu.neu.coe.info6205.util.PinyinUtil.getPinyin;
+import static edu.neu.coe.info6205.util.PinyinUtil.readAllChinese;
+
 public class LSDStringSort {
 
     private final int ASCII_RANGE = 256;
@@ -83,5 +89,25 @@ public class LSDStringSort {
      */
     public void sort(String[] strArr) {
         sort(strArr, 0, strArr.length - 1);
+    }
+
+    public static void main(String[] args) {
+        String[] s = readAllChinese();
+        String[] rs = new String[s.length];
+        for (int i = 0; i < s.length; i++){
+            rs[i] = getPinyin(s[i]," ");
+        }
+
+        Map<String,String> map = new IdentityHashMap<String, String>();
+        for(int i = 0; i < s.length; i++){
+            map.put(rs[i],s[i]);
+        }
+        LSDStringSort lsdStringSort = new LSDStringSort();
+        lsdStringSort.sort(rs);
+
+        for(String x: rs){
+//            System.out.println(x);
+            System.out.println(map.get(x));
+        }
     }
 }
