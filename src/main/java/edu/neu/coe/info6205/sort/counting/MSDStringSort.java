@@ -2,6 +2,7 @@ package edu.neu.coe.info6205.sort.counting;
 
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
 import edu.neu.coe.info6205.sort.elementary.InsertionSortMSD;
+import edu.neu.coe.info6205.util.Benchmark_Timer;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -84,28 +85,33 @@ public class MSDStringSort {
         MSDStringSort msdStringSort = new MSDStringSort();
         msdStringSort.sort(rs);
 
-        List<String> sortedChinese = new ArrayList<>();
-        for (String sortedPy : rs) {
-            String c = map.get(sortedPy);
-            sortedChinese.add(c);
-        }
+        // MSD
+        Benchmark_Timer<String[]> bm_msdStringSort = new Benchmark_Timer<String[]>("MSD String Sort", f -> {
+            msdStringSort.sort(rs);
+        });
+        double time_msdStringSort = bm_msdStringSort.runFromSupplier(() -> rs, 10);
+        System.out.println("Msd String Sort -- average time in milliseconds: " + time_msdStringSort);
 
-
-        //List<String> list = Arrays.asList(rs);
-        try {
-            FileOutputStream fis = new FileOutputStream("./src/outputChineseMSD.txt");
-            OutputStreamWriter isr = new OutputStreamWriter(fis);
-            BufferedWriter bw = new BufferedWriter(isr);
-            for (String i : sortedChinese) {
-                bw.write(i);
-                bw.newLine();
-                bw.flush();
-            }
-            bw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        List<String> sortedChinese = new ArrayList<>();
+//        for (String sortedPy : rs) {
+//            String c = map.get(sortedPy);
+//            sortedChinese.add(c);
+//        }
+//
+//        try {
+//            FileOutputStream fis = new FileOutputStream("./src/outputChineseMSD.txt");
+//            OutputStreamWriter isr = new OutputStreamWriter(fis);
+//            BufferedWriter bw = new BufferedWriter(isr);
+//            for (String i : sortedChinese) {
+//                bw.write(i);
+//                bw.newLine();
+//                bw.flush();
+//            }
+//            bw.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 //        for (String x : rs)
 //            System.out.println(map.get(x));

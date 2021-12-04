@@ -69,10 +69,10 @@ public class TimSort<X extends Comparable<X>> extends SortWithHelper<X> {
         TimSort timSort = new TimSort();
 //        timSort.sort(rs,0,rs.length);
 
-        Benchmark_Timer<String[]> bm_lsdStringSort = new Benchmark_Timer<String[]>("Tim String Sort", f -> {
+        Benchmark_Timer<String[]> bm_TimStringSort = new Benchmark_Timer<String[]>("Tim String Sort", f -> {
             timSort.sort(rs, 0, rs.length);
         });
-        double time_timStringSort = bm_lsdStringSort.runFromSupplier(() -> rs, 10);
+        double time_timStringSort = bm_TimStringSort.runFromSupplier(() -> rs, 10);
         System.out.println("Tim String Sort -- average time in milliseconds: " + time_timStringSort);
 
         for (String x : rs)

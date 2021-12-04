@@ -116,9 +116,9 @@ public class LSDStringSort {
         double time_lsdStringSort = bm_lsdStringSort.runFromSupplier(() -> rs, m);
         System.out.println("Lsd String Sort -- average time in milliseconds: " + time_lsdStringSort);
 
-        for (String x : rs)
+//        for (String x : rs)
 //            System.out.println(x);
-            System.out.println(map.get(x));
+//            System.out.println(map.get(x));
 
     }
 }

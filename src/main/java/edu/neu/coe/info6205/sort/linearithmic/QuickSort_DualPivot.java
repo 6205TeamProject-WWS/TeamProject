@@ -1,10 +1,13 @@
 package edu.neu.coe.info6205.sort.linearithmic;
 
 import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.Sort;
 import edu.neu.coe.info6205.sort.SortWithHelper;
 import edu.neu.coe.info6205.sort.counting.MSDStringSort;
+import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.Config;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -106,7 +109,7 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
         private final Helper<X> helper;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String[] s = readAllChinese();
         String[] rs = new String[s.length];
         for (int i = 0; i < s.length; i++) {
@@ -118,10 +121,18 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
             map.put(rs[i], s[i]);
         }
 
-//        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(rs.length, );
-//        quickSort_dualPivot.sort(rs,0,rs.length);
+        Config config = Config.load(rs.getClass());
+        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, rs.length,config);
+        quickSort_dualPivot.sort(rs,false);
+
+//        Benchmark_Timer<String[]> bm_QCDStringSort = new Benchmark_Timer<String[]>("QCD String Sort", f -> {
+//            quickSort_dualPivot.sort(rs,0,rs.length-1);
+//        });
+//        double time_QCDStringSort = bm_QCDStringSort.runFromSupplier(() -> rs, 1);
+//        System.out.println("QCD String Sort -- average time in milliseconds: " + time_QCDStringSort);
 
         for (String x : rs)
+//            System.out.println(x);
             System.out.println(map.get(x));
     }
 
