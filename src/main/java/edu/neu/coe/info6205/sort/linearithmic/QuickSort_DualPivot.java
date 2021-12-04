@@ -28,7 +28,6 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
     public static Map trans(String[] s, String[] rs){
 
-//        String[] rs = new String[s.length];
         for (int i = 0; i < s.length; i++) {
             rs[i] = getPinyin(s[i], " ");
         }

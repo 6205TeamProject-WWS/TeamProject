@@ -27,7 +27,7 @@ public class TimSort<X extends Comparable<X>> extends SortWithHelper<X> {
 
     private static Map<String, String> map = new IdentityHashMap<String, String>();
 
-    public static void trans(String[] s,String[] rs){
+    public static Map trans(String[] s, String[] rs){
 
         for (int i = 0; i < s.length; i++) {
             rs[i] = getPinyin(s[i], " ");
@@ -47,6 +47,8 @@ public class TimSort<X extends Comparable<X>> extends SortWithHelper<X> {
 
         for (String x : rs)
             map.get(x);
+
+        return map;
 
     }
     /**
