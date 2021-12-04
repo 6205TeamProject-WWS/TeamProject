@@ -25,6 +25,15 @@ public class SequenceEncoder_Collator extends BaseHuskySequenceCoder<String> {
     }
 
     /**
+     * Method to get the value of the Collator.
+     *
+     * @return collator
+     */
+    public Collator getCollator() {
+        return collator;
+    }
+
+    /**
      * Encode x as a long.
      * As much as possible, if x > y, huskyEncode(x) > huskyEncode(y).
      * If this cannot be guaranteed, then the result of imperfect(z) will be true.

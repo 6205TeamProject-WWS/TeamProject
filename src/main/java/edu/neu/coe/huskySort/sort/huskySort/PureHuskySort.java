@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.Collator;
 import java.util.*;
 
 import static java.util.Arrays.binarySearch;
@@ -92,8 +93,11 @@ public class PureHuskySort<X extends Comparable<X>> {
             return;
         if (useInsertionSort)
             new InsertionSort<X>().mutatingSort(xs);
-        else
-            Arrays.sort(xs);
+        else{
+            final Collator collator = huskyCoder.getCollator();
+            if (collator == null) Arrays.sort(xs);
+            else Arrays.sort(xs, collator);
+        }
     }
 
     /**

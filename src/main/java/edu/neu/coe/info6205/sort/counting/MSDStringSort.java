@@ -21,7 +21,7 @@ import static edu.neu.coe.info6205.util.PinyinUtil.readAllChinese;
  */
 public class MSDStringSort {
 
-    private static Map<String, String> map = new IdentityHashMap<String, String>();
+    public static Map<String, String> map = new IdentityHashMap<String, String>();
 
     public static void trans(String[] s,String[] rs){
 
@@ -39,6 +39,13 @@ public class MSDStringSort {
 
         for (String x : rs)
             map.get(x);
+
+//        List<String> sortedChinese = new ArrayList<>();
+//        for (String sortedPy : rs) {
+//            String c  = map.get(sortedPy);
+//            sortedChinese.add(c);
+//            rs = (String[]) sortedChinese.toArray();
+//        }
 
     }
 

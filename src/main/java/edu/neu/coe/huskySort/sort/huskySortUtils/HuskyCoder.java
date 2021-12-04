@@ -4,6 +4,7 @@
 package edu.neu.coe.huskySort.sort.huskySortUtils;
 
 import java.text.CollationKey;
+import java.text.Collator;
 
 /**
  * This interface models the essence of the Husky Sort mechanism.
@@ -86,4 +87,9 @@ public interface HuskyCoder<X> {
     default boolean perfect() {
         return false;
     }
+
+    default Collator getCollator() {
+        return null;
+    }
+
 }
