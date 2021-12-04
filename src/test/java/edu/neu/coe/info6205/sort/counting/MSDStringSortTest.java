@@ -45,6 +45,20 @@ public class MSDStringSortTest {
         assertEquals("Palestinian", xs[16]);
     }
 
+    //unit test by group 9
+    @Test
+    public void sort2() throws IOException {
+        int n = 5;
+        final Helper<String> helper = new BaseHelper<>("test", n, 1L, Config.load(MSDStringSortTest.class));
+        helper.init(n);
+        String[] words = {"wang2ze2en1","suo3xi1yue4","wang2shuo4","3","2634"};
+        final String[] xs = helper.random(String.class, r -> words[r.nextInt(words.length)]);
+        assertEquals(n, xs.length);
+        MSDStringSort.sort(xs);
+        assertEquals("2634", xs[0]);
+        assertEquals("wang2ze2en1", xs[4]);
+    }
+
     @Test
     public void testGetWords1() {
         String[] words = getWords("/3000-common-words.txt", MSDStringSortTest::lineAsList);
