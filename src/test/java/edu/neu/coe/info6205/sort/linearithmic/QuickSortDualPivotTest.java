@@ -5,19 +5,42 @@
 package edu.neu.coe.info6205.sort.linearithmic;
 
 import edu.neu.coe.info6205.sort.*;
+import edu.neu.coe.info6205.sort.counting.LSDStringSort;
+import edu.neu.coe.info6205.sort.counting.MSDStringSort;
+import edu.neu.coe.info6205.sort.counting.MSDStringSortTest;
 import edu.neu.coe.info6205.util.*;
+import io.cucumber.java.an.E;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static edu.neu.coe.info6205.util.Utilities.round;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @SuppressWarnings("ALL")
 public class QuickSortDualPivotTest {
+
+    @Test
+    public void sort() throws Exception{
+        int n = 16;
+        Map map;
+        String [] rs = new String[n];
+        List<String> sortedChinese = new ArrayList<>();
+        String[] words =  {"刘持平", "洪文胜", "樊辉辉", "苏会敏", "高民政", "曹玉德", "袁继鹏", "舒冬梅", "杨腊香", "许凤山", "王广风", "黄锡鸿", "罗庆富", "顾芳芳", "宋雪光", "王诗卉"};
+        assertEquals(n, words.length);
+        map = QuickSort_DualPivot.trans(words,rs);
+        for (String x : rs) {
+            String c = (String) map.get(x);
+            sortedChinese.add(c);
+        }
+        rs = sortedChinese.toArray(rs);
+        String[] sorted = {"曹玉德", "樊辉辉", "高民政", "顾芳芳", "洪文胜", "黄锡鸿", "刘持平", "罗庆富", "舒冬梅", "宋雪光", "苏会敏", "王广风", "王诗卉", "许凤山", "杨腊香", "袁继鹏"};
+        assertArrayEquals(sorted,rs);
+    }
 
     @Test
     public void testSort() throws Exception {

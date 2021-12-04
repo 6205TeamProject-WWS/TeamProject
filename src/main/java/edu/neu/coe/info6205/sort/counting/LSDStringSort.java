@@ -20,7 +20,7 @@ public class LSDStringSort {
 
     private static Map<String, String> map = new IdentityHashMap<String, String>();
 
-    public static void trans(String[] s, String[] rs){
+    public static Map trans(String[] s, String[] rs){
 
         for (int i = 0; i < s.length; i++) {
             rs[i] = getPinyin(s[i], " ");
@@ -35,6 +35,7 @@ public class LSDStringSort {
 
         for (String x : rs)
             map.get(x);
+        return map;
 
     }
 

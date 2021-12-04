@@ -26,7 +26,7 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
     private static Map <String, String> map = new IdentityHashMap<String, String>();
 
-    public static void trans(String[] s, String[] rs){
+    public static Map trans(String[] s, String[] rs){
 
 //        String[] rs = new String[s.length];
         for (int i = 0; i < s.length; i++) {
@@ -49,6 +49,7 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
         for (String x : rs)
             map.get(x);
+        return map;
 
     }
     public QuickSort_DualPivot(String description, int N, Config config) {
