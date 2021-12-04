@@ -21,11 +21,32 @@ import static edu.neu.coe.info6205.util.PinyinUtil.readAllChinese;
  */
 public class MSDStringSort {
 
+    public static void trans(String[] s){
+
+        String[] rs = new String[s.length];
+        for (int i = 0; i < s.length; i++) {
+            rs[i] = getPinyin(s[i], " ");
+        }
+
+        Map<String, String> map = new IdentityHashMap<String, String>();
+        for (int i = 0; i < s.length; i++) {
+            map.put(rs[i], s[i]);
+        }
+
+        MSDStringSort msdStringSort = new MSDStringSort();
+        msdStringSort.sort(rs);
+
+        for (String x : rs)
+            map.get(x);
+
+    }
+
     /**
      * Sort an array of Strings using MSDStringSort.
      *
      * @param a the array to be sorted.
      */
+
     public static void sort(String[] a) {
         int n = a.length;
         aux = new String[n];
@@ -72,24 +93,14 @@ public class MSDStringSort {
 
     public static void main(String[] args) {
         String[] s = readAllChinese();
-        String[] rs = new String[s.length];
-        for (int i = 0; i < s.length; i++) {
-            rs[i] = getPinyin(s[i], " ");
-        }
-
-        Map<String, String> map = new IdentityHashMap<String, String>();
-        for (int i = 0; i < s.length; i++) {
-            map.put(rs[i], s[i]);
-        }
 
         MSDStringSort msdStringSort = new MSDStringSort();
-        msdStringSort.sort(rs);
 
         // MSD
         Benchmark_Timer<String[]> bm_msdStringSort = new Benchmark_Timer<String[]>("MSD String Sort", f -> {
-            msdStringSort.sort(rs);
+            msdStringSort.trans(s);
         });
-        double time_msdStringSort = bm_msdStringSort.runFromSupplier(() -> rs, 10);
+        double time_msdStringSort = bm_msdStringSort.runFromSupplier(() -> s, 10);
         System.out.println("Msd String Sort -- average time in milliseconds: " + time_msdStringSort);
 
 //        List<String> sortedChinese = new ArrayList<>();
@@ -113,9 +124,6 @@ public class MSDStringSort {
 //            e.printStackTrace();
 //        }
 
-//        for (String x : rs)
-//            System.out.println(map.get(x));
-//            System.out.println(x);
     }
 
     private static final int radix = 256;

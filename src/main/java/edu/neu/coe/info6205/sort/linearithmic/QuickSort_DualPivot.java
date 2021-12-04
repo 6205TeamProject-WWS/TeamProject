@@ -3,6 +3,7 @@ package edu.neu.coe.info6205.sort.linearithmic;
 import edu.neu.coe.info6205.sort.Helper;
 import edu.neu.coe.info6205.sort.Sort;
 import edu.neu.coe.info6205.sort.SortWithHelper;
+import edu.neu.coe.info6205.sort.counting.LSDStringSort;
 import edu.neu.coe.info6205.sort.counting.MSDStringSort;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.Config;
@@ -20,6 +21,31 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
     public static final String DESCRIPTION = "QuickSort dual pivot";
 
+    public static void trans(String[] s){
+
+        String[] rs = new String[s.length];
+        for (int i = 0; i < s.length; i++) {
+            rs[i] = getPinyin(s[i], " ");
+        }
+
+        Map<String, String> map = new IdentityHashMap<String, String>();
+        for (int i = 0; i < s.length; i++) {
+            map.put(rs[i], s[i]);
+        }
+
+        Config config = null;
+        try {
+            config = Config.load(rs.getClass());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, rs.length,config);
+        quickSort_dualPivot.sort(rs,false);
+
+        for (String x : rs)
+            map.get(x);
+
+    }
     public QuickSort_DualPivot(String description, int N, Config config) {
         super(description, N, config);
         setPartitioner(createPartitioner());
@@ -111,29 +137,29 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
     public static void main(String[] args) throws IOException {
         String[] s = readAllChinese();
-        String[] rs = new String[s.length];
-        for (int i = 0; i < s.length; i++) {
-            rs[i] = getPinyin(s[i], " ");
-        }
+//        String[] rs = new String[s.length];
+//        for (int i = 0; i < s.length; i++) {
+//            rs[i] = getPinyin(s[i], " ");
+//        }
+//
+//        Map<String, String> map = new IdentityHashMap<String, String>();
+//        for (int i = 0; i < s.length; i++) {
+//            map.put(rs[i], s[i]);
+//        }
+//
+        Config config = Config.load(s.getClass());
+        QuickSort_DualPivot<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, s.length,config);
+//        quickSort_dualPivot.sort(rs,false);
 
-        Map<String, String> map = new IdentityHashMap<String, String>();
-        for (int i = 0; i < s.length; i++) {
-            map.put(rs[i], s[i]);
-        }
+        Benchmark_Timer<String[]> bm_QCDStringSort = new Benchmark_Timer<String[]>("QCD String Sort", f -> {
+            quickSort_dualPivot.trans(s);
+        });
+        double time_QCDStringSort = bm_QCDStringSort.runFromSupplier(() -> s, 10);
+        System.out.println("QCD String Sort -- average time in milliseconds: " + time_QCDStringSort);
 
-        Config config = Config.load(rs.getClass());
-        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, rs.length,config);
-        quickSort_dualPivot.sort(rs,false);
-
-//        Benchmark_Timer<String[]> bm_QCDStringSort = new Benchmark_Timer<String[]>("QCD String Sort", f -> {
-//            quickSort_dualPivot.sort(rs,0,rs.length-1);
-//        });
-//        double time_QCDStringSort = bm_QCDStringSort.runFromSupplier(() -> rs, 1);
-//        System.out.println("QCD String Sort -- average time in milliseconds: " + time_QCDStringSort);
-
-        for (String x : rs)
+//        for (String x : rs)
 //            System.out.println(x);
-            System.out.println(map.get(x));
+//            System.out.println(map.get(x));
     }
 
 }
