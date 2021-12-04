@@ -2,7 +2,13 @@ package edu.neu.coe.info6205.sort.counting;
 
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static edu.neu.coe.info6205.util.PinyinUtil.getPinyin;
@@ -12,18 +18,18 @@ public class LSDStringSort {
 
     private final int ASCII_RANGE = 256;
 
-    public static void trans(String[] s){
+    private static Map<String, String> map = new IdentityHashMap<String, String>();
 
-        String[] rs = new String[s.length];
+    public static void trans(String[] s, String[] rs){
+
         for (int i = 0; i < s.length; i++) {
             rs[i] = getPinyin(s[i], " ");
         }
 
-        Map<String, String> map = new IdentityHashMap<String, String>();
+//        Map<String, String> map = new IdentityHashMap<String, String>();
         for (int i = 0; i < s.length; i++) {
             map.put(rs[i], s[i]);
         }
-
         LSDStringSort lsdStringSort = new LSDStringSort();
         lsdStringSort.sort(rs);
 
@@ -115,17 +121,45 @@ public class LSDStringSort {
 
     public static void main(String[] args) {
         String[] s = readAllChinese();
+        String[] rs = new String[s.length];
 
         LSDStringSort lsdStringSort = new LSDStringSort();
-//        lsdStringSort.sort(rs);
-
 
         //LSD benchmark
         Benchmark_Timer<String[]> bm_lsdStringSort = new Benchmark_Timer<String[]>("LSD String Sort", f -> {
-            lsdStringSort.trans(s);
+            lsdStringSort.trans(s,rs);
         });
         double time_lsdStringSort = bm_lsdStringSort.runFromSupplier(() -> s, 10);
         System.out.println("Lsd String Sort -- average time in milliseconds: " + time_lsdStringSort);
+//        lsdStringSort.trans(s,rs);
+//        for (String x :rs){
+//            System.out.println(map.get(x));
+//        }
+
+        int num = 0;
+        List<String> sortedChinese = new ArrayList<>();
+        for (String sortedPy : rs) {
+            String c = map.get(sortedPy);
+            sortedChinese.add(c);
+            num++;
+            if(num>=1000)
+                break;
+        }
+
+        try {
+            FileOutputStream fis = new FileOutputStream("./src/outputChineseLSD.txt");
+            OutputStreamWriter isr = new OutputStreamWriter(fis);
+            BufferedWriter bw = new BufferedWriter(isr);
+            for (String i : sortedChinese) {
+                bw.write(i);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

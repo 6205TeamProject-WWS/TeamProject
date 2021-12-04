@@ -21,14 +21,15 @@ import static edu.neu.coe.info6205.util.PinyinUtil.readAllChinese;
  */
 public class MSDStringSort {
 
-    public static void trans(String[] s){
+    private static Map<String, String> map = new IdentityHashMap<String, String>();
 
-        String[] rs = new String[s.length];
+    public static void trans(String[] s,String[] rs){
+
         for (int i = 0; i < s.length; i++) {
             rs[i] = getPinyin(s[i], " ");
         }
 
-        Map<String, String> map = new IdentityHashMap<String, String>();
+
         for (int i = 0; i < s.length; i++) {
             map.put(rs[i], s[i]);
         }
@@ -75,7 +76,6 @@ public class MSDStringSort {
         for (int i = lo; i <= hi; i++)     // Distribute.
             aux[count[charAt(a[i], d) + 1]++] = a[i];
 //             Copy back.
-//        if (hi - lo >= 0) System.arraycopy(aux, 0, a, lo, hi - lo);
 //            // Recursively sort for each character value.
 //            // TO BE IMPLEMENTED
 //
@@ -93,36 +93,41 @@ public class MSDStringSort {
 
     public static void main(String[] args) {
         String[] s = readAllChinese();
+        String[] rs = new String[s.length];
 
         MSDStringSort msdStringSort = new MSDStringSort();
 
         // MSD
         Benchmark_Timer<String[]> bm_msdStringSort = new Benchmark_Timer<String[]>("MSD String Sort", f -> {
-            msdStringSort.trans(s);
+            msdStringSort.trans(s,rs);
         });
         double time_msdStringSort = bm_msdStringSort.runFromSupplier(() -> s, 10);
         System.out.println("Msd String Sort -- average time in milliseconds: " + time_msdStringSort);
 
-//        List<String> sortedChinese = new ArrayList<>();
-//        for (String sortedPy : rs) {
-//            String c = map.get(sortedPy);
-//            sortedChinese.add(c);
-//        }
-//
-//        try {
-//            FileOutputStream fis = new FileOutputStream("./src/outputChineseMSD.txt");
-//            OutputStreamWriter isr = new OutputStreamWriter(fis);
-//            BufferedWriter bw = new BufferedWriter(isr);
-//            for (String i : sortedChinese) {
-//                bw.write(i);
-//                bw.newLine();
-//                bw.flush();
-//            }
-//            bw.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        int num = 0;
+        List<String> sortedChinese = new ArrayList<>();
+        for (String sortedPy : rs) {
+            String c = map.get(sortedPy);
+            sortedChinese.add(c);
+            num++;
+            if(num>=1000)
+                break;
+        }
+
+        try {
+            FileOutputStream fis = new FileOutputStream("./src/outputChineseMSD.txt");
+            OutputStreamWriter isr = new OutputStreamWriter(fis);
+            BufferedWriter bw = new BufferedWriter(isr);
+            for (String i : sortedChinese) {
+                bw.write(i);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -8,7 +8,10 @@ import edu.neu.coe.info6205.sort.counting.MSDStringSort;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.Config;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -21,14 +24,16 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
     public static final String DESCRIPTION = "QuickSort dual pivot";
 
-    public static void trans(String[] s){
+    private static Map <String, String> map = new IdentityHashMap<String, String>();
 
-        String[] rs = new String[s.length];
+    public static void trans(String[] s, String[] rs){
+
+//        String[] rs = new String[s.length];
         for (int i = 0; i < s.length; i++) {
             rs[i] = getPinyin(s[i], " ");
         }
 
-        Map<String, String> map = new IdentityHashMap<String, String>();
+//        Map<String, String> map = new IdentityHashMap<String, String>();
         for (int i = 0; i < s.length; i++) {
             map.put(rs[i], s[i]);
         }
@@ -39,7 +44,7 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, rs.length,config);
+        QuickSort<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, rs.length, config);
         quickSort_dualPivot.sort(rs,false);
 
         for (String x : rs)
@@ -137,29 +142,43 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
 
     public static void main(String[] args) throws IOException {
         String[] s = readAllChinese();
-//        String[] rs = new String[s.length];
-//        for (int i = 0; i < s.length; i++) {
-//            rs[i] = getPinyin(s[i], " ");
-//        }
-//
-//        Map<String, String> map = new IdentityHashMap<String, String>();
-//        for (int i = 0; i < s.length; i++) {
-//            map.put(rs[i], s[i]);
-//        }
-//
+        String[] rs = new String[s.length];
+
         Config config = Config.load(s.getClass());
         QuickSort_DualPivot<String> quickSort_dualPivot = new QuickSort_DualPivot<String>(DESCRIPTION, s.length,config);
 //        quickSort_dualPivot.sort(rs,false);
 
         Benchmark_Timer<String[]> bm_QCDStringSort = new Benchmark_Timer<String[]>("QCD String Sort", f -> {
-            quickSort_dualPivot.trans(s);
+            quickSort_dualPivot.trans(s,rs);
         });
         double time_QCDStringSort = bm_QCDStringSort.runFromSupplier(() -> s, 10);
         System.out.println("QCD String Sort -- average time in milliseconds: " + time_QCDStringSort);
 
-//        for (String x : rs)
-//            System.out.println(x);
-//            System.out.println(map.get(x));
+        int num = 0;
+        List<String> sortedChinese = new ArrayList<>();
+        for (String sortedPy : rs) {
+            String c = map.get(sortedPy);
+            sortedChinese.add(c);
+            num++;
+            if(num>=1000)
+                break;
+        }
+
+        try {
+            FileOutputStream fis = new FileOutputStream("./src/outputChineseQDS.txt");
+            OutputStreamWriter isr = new OutputStreamWriter(fis);
+            BufferedWriter bw = new BufferedWriter(isr);
+            for (String i : sortedChinese) {
+                bw.write(i);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

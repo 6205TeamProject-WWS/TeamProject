@@ -58,7 +58,7 @@ public class PureHuskySort<X extends Comparable<X>> {
         sortedChinese = sortedChinese.subList(0, 1000);
 
         try {
-            FileOutputStream fis = new FileOutputStream("./src/outputChinesePureHusky1000.txt");
+            FileOutputStream fis = new FileOutputStream("./src/outputChineseHusky.txt");
             OutputStreamWriter isr = new OutputStreamWriter(fis);
             BufferedWriter bw = new BufferedWriter(isr);
             for (String i : sortedChinese) {
