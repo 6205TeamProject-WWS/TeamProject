@@ -4,11 +4,15 @@ Shuo Wang, Xiyue Suo, Zeen Wang
 
 Sort & Benchmark. You need to run the Main method.
 
-MSD -> src/main/java/edu/neu/coe/info6205/sort/counting/MSDStringSort
-LSD -> */sort/counting/LSDStringSort
-DualPivot -> */sort/linearithmic/QuickSort_DualPivot
-TimSort -> */sort/linearithmic/TimSort
-HuskySort ->src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySort
+MSD: src/main/java/edu/neu/coe/info6205/sort/counting/MSDStringSor
+
+LSD: */sort/counting/LSDStringSort
+
+DualPivot: */sort/linearithmic/QuickSort_DualPivot
+
+TimSort: */sort/linearithmic/TimSort
+
+HuskySort: src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySort
 
 Test. You need to run the test file.
 
