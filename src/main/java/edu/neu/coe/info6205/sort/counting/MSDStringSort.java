@@ -3,6 +3,7 @@ package edu.neu.coe.info6205.sort.counting;
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
 import edu.neu.coe.info6205.sort.elementary.InsertionSortMSD;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
+import edu.neu.coe.info6205.util.PinyinUtil;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -24,21 +25,25 @@ public class MSDStringSort {
     private static Map<String, String> map = new IdentityHashMap<String, String>();
 
     public static Map trans(String[] s,String[] rs){
+//        for (int j = 0; j < 4; j++){
 
-        for (int i = 0; i < s.length; i++) {
-            rs[i] = getPinyin(s[i], " ");
-        }
+            for (int i = 0; i < s.length; i++) {
+                rs[i] = getPinyin(s[i], " ");
+//                System.out.println(i);
+            }
 
-        for (int i = 0; i < s.length; i++) {
-            map.put(rs[i], s[i]);
-        }
+            for (int i = 0; i < s.length; i++) {
+                map.put(rs[i], s[i]);
+            }
 
-        MSDStringSort msdStringSort = new MSDStringSort();
-        msdStringSort.sort(rs);
+            MSDStringSort msdStringSort = new MSDStringSort();
+            msdStringSort.sort(rs);
 
-        for (String x : rs){
-             map.get(x);
-        }
+            for (String x : rs){
+                map.get(x);
+            }
+//        }
+
         return map;
     }
 
@@ -92,14 +97,16 @@ public class MSDStringSort {
     }
 
     public static void main(String[] args) {
-        String[] s = readAllChinese();
+        String[] s = PinyinUtil.readAllChinese();
+//        System.out.println(s.length);
         String[] rs = new String[s.length];
 
         MSDStringSort msdStringSort = new MSDStringSort();
 
         // MSD
         Benchmark_Timer<String[]> bm_msdStringSort = new Benchmark_Timer<String[]>("MSD String Sort", f -> {
-            msdStringSort.trans(s,rs);
+//            for (int i = 0; i <4; i++)
+                msdStringSort.trans(s,rs);
         });
         double time_msdStringSort = bm_msdStringSort.runFromSupplier(() -> s, 10);
         System.out.println("Msd String Sort -- average time in milliseconds: " + time_msdStringSort);
@@ -107,6 +114,7 @@ public class MSDStringSort {
         int num = 0;
         List<String> sortedChinese = new ArrayList<>();
         for (String sortedPy : rs) {
+//            System.out.println(sortedPy);
             String c = map.get(sortedPy);
             sortedChinese.add(c);
             num++;

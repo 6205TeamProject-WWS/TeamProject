@@ -6,6 +6,7 @@ import edu.neu.coe.huskySort.sort.huskySortUtils.HuskyCoderFactory;
 import edu.neu.coe.huskySort.sort.simple.InsertionSort;
 import edu.neu.coe.huskySort.util.LazyLogger;
 import edu.neu.coe.huskySort.util.PinyinUtil;
+import edu.neu.coe.info6205.sort.counting.MSDStringSort;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 
 import java.io.BufferedWriter;
@@ -15,6 +16,7 @@ import java.io.OutputStreamWriter;
 import java.text.Collator;
 import java.util.*;
 
+import static edu.neu.coe.info6205.util.PinyinUtil.getPinyin;
 import static java.util.Arrays.binarySearch;
 
 /**
@@ -26,25 +28,37 @@ import static java.util.Arrays.binarySearch;
  */
 public class PureHuskySort<X extends Comparable<X>> {
 
+    private static Map<String, String> map = new IdentityHashMap<String, String>();
+    public static void trans(String[] s, String[] rs){
+
+        for (int i = 0; i < s.length; i++) {
+            rs[i] = getPinyin(s[i], " ");
+        }
+
+        for (int i = 0; i < s.length; i++) {
+            map.put(rs[i], s[i]);
+        }
+
+        final PureHuskySort<String> sorter = new PureHuskySort<>(HuskyCoderFactory.asciiCoder, false, false);
+//        msdStringSort.sort(rs);
+        sorter.sort(rs);
+
+        for (String x : rs){
+            map.get(x);
+        }
+
+    }
     public static void main(final String[] args) {
 
         String[] s = PinyinUtil.readAllChinese();
         String[] rs = new String[s.length];
-        for (int i = 0; i < s.length; i++) {
-            rs[i] = PinyinUtil.getPinyin(s[i], " ");
-        }
-
-        Map<String, String> map = new IdentityHashMap<String, String>();
-        for (int i = 0; i < s.length; i++) {
-            map.put(rs[i], s[i]);
-        }
 
 //        logger.info("PureHuskySort.main: sorting 1 million Chinese names " + m + " time(s)");
         // Just for test purpose: this should take about 3 minutes
         final PureHuskySort<String> sorter = new PureHuskySort<>(HuskyCoderFactory.asciiCoder, false, false);
 
         Benchmark_Timer<String[]> bm_PHuskyStringSort = new Benchmark_Timer<String[]>("PHusky String Sort", f -> {
-            sorter.sort(rs);
+            sorter.trans(s,rs);
         });
 
         double time_PHuskyStringSort = bm_PHuskyStringSort.runFromSupplier(() -> s, 10);
