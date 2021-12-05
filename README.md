@@ -1,6 +1,6 @@
 # **TeamProject**
 # INFO 6205 21Fall Group 9
-** Shuo Wang, Xiyue Suo, Zeen Wang **
+**Shuo Wang, Xiyue Suo, Zeen Wang**
 
 ## Sort & Benchmark. You need to run the Main method.
 
