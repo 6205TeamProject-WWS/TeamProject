@@ -1,8 +1,8 @@
-# TeamProject
-INFO 6205 21Fall Group 9
-Shuo Wang, Xiyue Suo, Zeen Wang
+# **TeamProject**
+# INFO 6205 21Fall Group 9
+## Shuo Wang, Xiyue Suo, Zeen Wang
 
-Sort & Benchmark. You need to run the Main method.
+## Sort & Benchmark. You need to run the Main method.
 
 MSD: src/main/java/edu/neu/coe/info6205/sort/counting/MSDStringSor
 
@@ -14,14 +14,14 @@ TimSort: */sort/linearithmic/TimSort
 
 HuskySort: src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySort
 
-Test. You need to run the test file.
+## Test. You need to run the test file.
 
-MSD -> src/test/java/edu/neu/coe/info6205/sort/counting/MSDStringSortTest
+MSD: src/test/java/edu/neu/coe/info6205/sort/counting/MSDStringSortTest
 
-LSD -> */sort/counting/LSDStringSortTestRunner
+LSD: */sort/counting/LSDStringSortTestRunner
 
-DualPivot -> */sort/linearithmic/QuickSort_DualPivotTest
+DualPivot: */sort/linearithmic/QuickSort_DualPivotTest
 
-TimSort -> */sort/linearithmic/TimSortTest
+TimSort: */sort/linearithmic/TimSortTest
 
-HuskySort ->src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySortTest
+HuskySort: src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySortTest
