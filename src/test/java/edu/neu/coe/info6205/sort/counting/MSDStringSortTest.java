@@ -59,6 +59,9 @@ public class MSDStringSortTest {
         rs = sortedChinese.toArray(rs);
         String[] sorted = {"曹玉德", "樊辉辉", "高民政", "顾芳芳", "洪文胜", "黄锡鸿", "刘持平", "罗庆富", "舒冬梅", "宋雪光", "苏会敏", "王广风", "王诗卉", "许凤山", "杨腊香", "袁继鹏"};
         assertArrayEquals(sorted,rs);
+        System.out.println("words: " + Arrays.toString(words));
+        System.out.println("sorted  " + Arrays.toString(sorted));
+        System.out.println("output  " + Arrays.toString(rs));
     }
 
     @Test
