@@ -76,16 +76,13 @@ public class PureHuskySortTest {
         System.out.println("xs input words:  " + Arrays.toString(xs));
         PureHuskySort<String> sorter = new PureHuskySort<>(HuskyCoderFactory.chineseEncoder, false, false);
         sorter.sort(xs);
-        //System.out.println(Arrays.toString(xs));
         // order:           31014   145313   181452   199395   252568   293165   453922  520163   659494    669978   673679  744769   765753   890721   923995    988329
         String[] sorted = {"曹玉德", "樊辉辉", "高民政", "顾芳芳", "洪文胜", "黄锡鸿", "刘持平", "罗庆富", "舒冬梅", "宋雪光", "苏会敏", "王广风", "王诗卉", "许凤山", "杨腊香", "袁继鹏"};
         assertArrayEquals(sorted, xs);
-
         System.out.println("sorted        " + Arrays.toString(sorted));
         System.out.println("output        " + Arrays.toString(xs));
 //        assertTrue("sorted", helper.sorted(xs));
     }
-
 
     @Test
     public void testFloorLg() {

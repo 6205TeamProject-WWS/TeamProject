@@ -6,7 +6,6 @@ import edu.neu.coe.huskySort.sort.huskySortUtils.HuskyCoderFactory;
 import edu.neu.coe.huskySort.sort.simple.InsertionSort;
 import edu.neu.coe.huskySort.util.LazyLogger;
 import edu.neu.coe.huskySort.util.PinyinUtil;
-import edu.neu.coe.info6205.sort.counting.MSDStringSort;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 
 import java.io.BufferedWriter;
