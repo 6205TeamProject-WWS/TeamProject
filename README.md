@@ -24,3 +24,6 @@ DualPivot: */sort/linearithmic/QuickSort_DualPivotTest
 TimSort: */sort/linearithmic/TimSortTest
 
 HuskySort: src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySortTest
+
+
+**the outfile are in the src, named as outputChinesexxx.txt**
