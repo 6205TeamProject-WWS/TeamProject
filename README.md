@@ -26,4 +26,4 @@ TimSort: */sort/linearithmic/TimSortTest
 HuskySort: src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySortTest
 
 
-**the out files are in the src, named as outputChinesexxx.txt (xxx is number of input size)**
+**the output files are in the src, named as outputChinesexxx.txt (xxx is number of input size)**
