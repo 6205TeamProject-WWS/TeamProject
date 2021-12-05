@@ -17,7 +17,11 @@ HuskySort: src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySort
 Test. You need to run the test file.
 
 MSD -> src/test/java/edu/neu/coe/info6205/sort/counting/MSDStringSortTest
+
 LSD -> */sort/counting/LSDStringSortTestRunner
+
 DualPivot -> */sort/linearithmic/QuickSort_DualPivotTest
+
 TimSort -> */sort/linearithmic/TimSortTest
+
 HuskySort ->src/main/java/edu/neu/coe/huskySort/sort/huskySort/PureHuskySortTest
