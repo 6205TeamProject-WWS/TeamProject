@@ -1,5 +1,5 @@
 # INFO 6205 21Fall Team Project Group 9
-**Shuo Wang, Xiyue Suo, Zeen Wang**
+**Xiyue Suo, Zeen Wang, Shuo Wang**
 
 ## Sort & Benchmark. You need to run the main method in each file.
 
