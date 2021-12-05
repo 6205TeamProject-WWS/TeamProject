@@ -29,7 +29,6 @@ public class MSDStringSort {
             rs[i] = getPinyin(s[i], " ");
         }
 
-
         for (int i = 0; i < s.length; i++) {
             map.put(rs[i], s[i]);
         }

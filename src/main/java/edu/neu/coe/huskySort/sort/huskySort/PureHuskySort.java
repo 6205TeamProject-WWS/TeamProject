@@ -7,6 +7,7 @@ import edu.neu.coe.huskySort.sort.huskySortUtils.HuskySortHelper;
 import edu.neu.coe.huskySort.sort.simple.InsertionSort;
 import edu.neu.coe.huskySort.util.LazyLogger;
 import edu.neu.coe.huskySort.util.PinyinUtil;
+import edu.neu.coe.info6205.util.Benchmark_Timer;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -39,17 +40,17 @@ public class PureHuskySort<X extends Comparable<X>> {
             map.put(rs[i], s[i]);
         }
 
-        //final int N = 50000;
-        final int m = 1;
-        //logger.info("PureHuskySort.main: sorting " + N + " random alphabetic ASCII words " + m + " times");
-        logger.info("PureHuskySort.main: sorting 1 million Chinese names " + m + " time(s)");
+//        logger.info("PureHuskySort.main: sorting 1 million Chinese names " + m + " time(s)");
         // Just for test purpose: this should take about 3 minutes
         final PureHuskySort<String> sorter = new PureHuskySort<>(HuskyCoderFactory.asciiCoder, false, false);
-        for (int i = 0; i < m; i++) {
-            //final String[] alphaBetaArray = HuskySortHelper.generateRandomAlphaBetaArray(N, 4, 9);
+
+        Benchmark_Timer<String[]> bm_PHuskyStringSort = new Benchmark_Timer<String[]>("PHusky String Sort", f -> {
             sorter.sort(rs);
-        }
-        logger.info("PureHuskySort.main: finished");
+        });
+
+        double time_PHuskyStringSort = bm_PHuskyStringSort.runFromSupplier(() -> s, 10);
+
+        System.out.println("PHusky String Sort -- average time in milliseconds: " + time_PHuskyStringSort);
 
         List<String> sortedChinese = new ArrayList<>();
         for (String sortedPy : rs) {
